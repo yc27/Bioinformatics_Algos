@@ -3,9 +3,7 @@ using namespace std;
 
 string find_random_motif(string str, int k, int n)
 {
-    int pos = (rand() % n) - k;
-    while(pos < 0)
-        pos = (rand() % n) - k;
+    int pos = rand() % (n - k);
     return str.substr(pos, k);
 }
 
@@ -20,22 +18,8 @@ vector<string> find_profile_most_motifs(int t, int n, int k, string dna[], doubl
         best_score = 0;
         for(int j = 0; j < n-k; ++j)
         {
-            switch(dna[i][j])
-            {
-                case 'A':
-                case 'a': score = profile[0][0];
-                        break;
-                case 'C':
-                case 'c': score = profile[1][0];
-                        break;
-                case 'G':
-                case 'g': score = profile[2][0];
-                        break;
-                case 'T':
-                case 't': score = profile[3][0];
-                        break;
-            }
-            for(int pos = 1; pos < k; ++pos)
+            score = 1;
+            for(int pos = 0; pos < k; ++pos)
             {
                 switch(dna[i][j+pos])
                 {
